@@ -11,3 +11,9 @@
 [submodule "lib/html5-boilerplate"]
 	path = lib/html5-boilerplate
 	url = http://github.com/robrighter/html5-boilerplate.git
+[submodule "lib/node-cms"]
+	path = lib/node-cms
+	url = git://github.com/robrighter/node-cms.git
+[submodule "lib/formidable"]
+	path = lib/formidable
+	url = https://github.com/felixge/node-formidable.git
