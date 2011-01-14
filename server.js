@@ -6,6 +6,8 @@ var connect = require('connect')
     , io = require('Socket.IO-node')
     , port = (process.env.PORT || 8081);
 
+var nodecms = require('node-cms');
+
 //Setup Express
 var server = express.createServer();
 server.configure(function(){
@@ -59,19 +61,7 @@ io.on('connection', function(client){
 ///////////////////////////////////////////
 
 /////// ADD ALL YOUR ROUTES HERE  /////////
-
-server.get('/', function(req,res){
-  res.render('index.ejs', {
-    locals : { 
-              header: '#Header#'
-             ,footer: '#Footer#'
-             ,title : 'Page Title'
-             ,description: 'Page Description'
-             ,author: 'Your Name'
-             ,analyticssiteid: 'XXXXXXX' 
-            }
-  });
-});
+nodecms.setupExpressJSRoutes(server);
 
 
 //A Route for Creating a 500 Error (Useful to keep around)
@@ -80,7 +70,7 @@ server.get('/500', function(req, res){
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
-server.get('/*', function(req, res){
+server.get('*', function(req, res){
     throw new NotFound;
 });
 
