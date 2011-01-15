@@ -6,7 +6,9 @@ var connect = require('connect')
     , io = require('Socket.IO-node')
     , port = (process.env.PORT || 8081);
 
-var nodecms = require('node-cms');
+var settings = require('./cms-settings').settings;
+var CMS = new require('node-cms').CMS;
+var nodecms = new CMS(settings);
 
 //Setup Express
 var server = express.createServer();
