@@ -1,0 +1,15 @@
+exports.settings = {
+  SecretKey : 'PUT-RANDOM-CHARACTERS-HERE',
+  MongoConnectionString : 'mongodb://username:password@hostname:port/database',
+  InitialUser: {
+    username: 'adminusername',
+    password: 'thepass',
+    email: 'admin@email.com',
+    firstname: 'Donald',
+    lastname: 'Duck'
+  },
+  FrontEndViews: __dirname + '/views/cmsviews',
+  AdminAssetsWebPath: '/admin',
+  AdminAssetsFilePath: __dirname + '/static/admin'
+  
+}
