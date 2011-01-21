@@ -6,6 +6,10 @@ var connect = require('connect')
     , io = require('Socket.IO-node')
     , port = (process.env.PORT || 8081);
 
+var utils = require('connect/utils');
+var formidable = require('formidable');
+var form = require('connect-form');
+
 var settings = require('./cms-settings').settings;
 var CMS = new require('node-cms').CMS;
 var nodecms = new CMS(settings);
@@ -13,11 +17,14 @@ var nodecms = new CMS(settings);
 //Setup Express
 var server = express.createServer();
 server.configure(function(){
+    server.use(express.cookieDecoder());
+    server.use(express.session());
     server.set('views', __dirname + '/views');
-    server.use(connect.bodyDecoder());
+    server.use(form({ keepExtensions: true, uploadDir: settings.UploadedFiles }));
     server.use(connect.staticProvider(__dirname + '/static'));
     server.use(server.router);
 });
+nodecms.setupExpressJSRoutes(server);
 
 //setup the errors
 server.error(function(err, req, res, next){
@@ -63,7 +70,6 @@ io.on('connection', function(client){
 ///////////////////////////////////////////
 
 /////// ADD ALL YOUR ROUTES HERE  /////////
-nodecms.setupExpressJSRoutes(server);
 
 
 //A Route for Creating a 500 Error (Useful to keep around)
